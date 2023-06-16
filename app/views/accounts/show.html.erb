@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<p>Account Number: <%= @account.account_number %></p>
+<p>Balance: <%= @account.balance %></p>
+<p>Owner: <%= @account.user.name %></p>
+
+
+<div>
+  <%= link_to "Edit this account", edit_account_path(@account),  class: "btn btn-primary"  %> |
+  <%= link_to "Back to accounts", accounts_path,  class: "btn btn-primary"  %>
+
+  <%= button_to "Destroy this account", @account, method: :delete,  class: "btn btn-primary"  %>
+</div>
