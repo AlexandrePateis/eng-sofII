@@ -45,18 +45,12 @@ class AccountsController < ApplicationController
       ActiveRecord::Base.transaction do
         @source_account.update(balance: @source_account.balance - amount)
         @target_account.update(balance: @target_account.balance + amount)
-  
-        # Criação das transações
-        Transaction.create(account_id: @source_account.id, amount: -amount, description: "Transferência para conta ##{params[:account_number]}")
-        Transaction.create(account_id: @target_account.id, amount: amount, description: "Transferência da conta ##{current_user.account.account_number}")
       end
       redirect_to accounts_path, notice: 'Transferência realizada com sucesso.'
     else
       redirect_to accounts_path, alert: 'Falha na transferência. Verifique os dados da conta de destino e o saldo da sua conta.'
     end
   end
-  
-  
   
   
   def deposit_form
@@ -78,9 +72,8 @@ class AccountsController < ApplicationController
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # DELETE /accounts/1 or /accounts/1.json
+  end  
+  
   def destroy
     @account.destroy
 
@@ -89,6 +82,9 @@ class AccountsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # DELETE /accounts/1 or /accounts/1.json
+
 
   def withdraw
 

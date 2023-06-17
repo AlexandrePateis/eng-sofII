@@ -1,33 +1,32 @@
 <h1 class="text-center mt-3">Extrato</h1>
 
 <div class="row-my">
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Hora</th>
-      <th>Ação</th>
-      <th>Valor</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% (@transactions + @transfer_transactions).sort_by(&:created_at).reverse.each do |transaction| %>
-    <tr>
-      <td><%= transaction.created_at.strftime("%d/%m/%Y") %></td>
-      <td><%= transaction.created_at.strftime("%H:%M:%S") %></td>
-      <td><%= transaction.action %></td>
-      <td><%= transaction.amount %></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
-<button onclick="window.print()" class="btn btn-primary d-print-none">Imprimir</button>
-
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Ação</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (@transactions + @transfer_transactions).sort_by(&:created_at).reverse.each do |transaction| %>
+        <tr>
+          <td><%= transaction.created_at.strftime("%d/%m/%Y") %></td>
+          <td><%= transaction.created_at.strftime("%H:%M:%S") %></td>
+          <td><%= transaction.action %></td>
+          <td><%= transaction.amount.negative? ? transaction.amount : "+#{transaction.amount}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <button onclick="window.print()" class="btn btn-primary d-print-none">Imprimir</button>
 </div>
+
 <style>
 .row-my{
   width: 60%;
   margin: 0 auto;
 }
-
 </style>

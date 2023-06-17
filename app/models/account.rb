@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
     belongs_to :user, class_name: 'User'
+    has_many :transactions, dependent: :destroy
 
     validates :account_number, uniqueness: true
 
