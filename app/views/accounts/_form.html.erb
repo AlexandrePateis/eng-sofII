@@ -1,3 +1,4 @@
+<div class="d-flex flex-column row-my border bg-light p-5 mt-3">
 <%= form_with(model: account) do |form| %>
   <% if account.errors.any? %>
     <div style="color: red">
@@ -12,15 +13,22 @@
   <% end %>
 
   <div>
-    <p>Após informar o saldo inicial, o número da sua conta será criado automaticamente!</p>
+    <p class="text-center">Após informar o saldo inicial, o número da sua conta será criado automaticamente!</p>
   </div>
 
-  <div>
-    <%= form.label :balance, style: "display: block" %>
-    <%= form.text_field :balance %>
+  <div class="d-flex flex-column">
+    <%= form.label :balance, "Saldo inicial", style: "display: block", class: "text-center fw-bold" %>
+    <%= form.number_field :balance, class: "form-control mt-2" %>
+    <%= form.submit "Criar conta", class: "btn btn-primary mt-3" %>
+    <%= link_to "Voltar", accounts_path, class: "btn btn-secondary mt-2" %>
+
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
+  </div>
+  <style>
+.row-my{
+  width: 35%;
+  margin: 0 auto;
+}
+</style>

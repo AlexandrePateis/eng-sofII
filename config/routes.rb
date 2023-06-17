@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
+  resources :users, only: [:edit, :update]
+  get '/extrato', to: 'transactions#extrato', as: 'extrato_transactions'
+
   resources :accounts do
     member do
+      get 'transfer', to: 'accounts#transfer_form', as: :transfer_form
+      post 'transfer', to: 'accounts#transfer', as: :transfer
       get 'withdraw' => 'accounts#withdraw_form', as: :withdraw_form
       post 'withdraw' => 'accounts#withdraw', as: :withdraw
       get 'deposit' => 'accounts#deposit_form', as: :deposit_form

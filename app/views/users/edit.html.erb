@@ -1,0 +1,61 @@
+<%= form_for(current_user, url: user_registration_path, method: :put, html: { class: "needs-validation", novalidate: true }) do |f| %>
+<h1 class="text-center">Atualização cadastral</h1>
+<div class="d-flex flex-column my-class gap-3">
+  <div class="form-group">
+    <%= f.label :name, class: "fw-bold"  %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cpf, 'CPF', class: "fw-bold" %>
+    <%= f.text_field :cpf, class: "form-control", autocomplete: "off", id: "user_cpf" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :birthdate, 'Data de nascimento', class: "fw-bold" %>
+    <%= f.date_field :birthdate, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :marital_status,'Estado Civil', class: "fw-bold" %>
+    <%= f.select :marital_status, options_for_select(['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)']), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gender,'Genêro', class: "fw-bold"  %>
+    <%= f.select :gender, options_for_select(['Masculino', 'Feminino', 'Outro']), {}, class: "form-control" %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :password,'Senha', class: "fw-bold"  %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    <% if @minimum_password_length %>
+      <small class="form-text text-muted"><%= @minimum_password_length %> characters minimum</small>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation,'Confirme sua senha', class: "fw-bold"  %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :current_password, class: "d-none" %> 
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control d-none" %>
+  </div>
+  <%= f.submit "Atualizar", class: "btn btn-primary mt-3" %>
+  <%= link_to "Voltar", accounts_path, class: "btn btn-secondary mt-2" %>
+
+</div>
+
+<% end %>
+<style>
+.my-class{
+  width: 50%;
+  margin: 0 auto;
+}
+
+</style>
+
+

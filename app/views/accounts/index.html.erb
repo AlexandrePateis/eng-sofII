@@ -1,13 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <p id="alert-alert" class="alert alert-success text-center my-alert mt-1 fw-bold"><%= notice %></p>
+<% end %>
+
+<% if alert.present? %>
+  <p id="alert-alert" class="alert alert-danger text-center my-alert mt-1 fw-bold"><%= alert %></p>
+<% end %>
 
 <h1 class="text-center">Conta</h1>
 
 <div id="accounts" class="d-flex">
-  <% @accounts.each do |account| %>
-    <%= render account %>
-      <%= link_to "Ver conta", account,  class: "btn btn-primary" %>
+ <% @accounts.each do |account| %>
+  <%= render account %>
+  <% if account.user == current_user %>
+    <%= link_to "Ver conta", account, class: "btn btn-primary" %>
   <% end %>
-    <%= link_to "Nova conta", new_account_path ,  class: "btn btn-primary" %>
-  
+<% end %>
+
+<% if !current_user.account %>
+  <%= link_to "Nova conta", new_account_path ,  class: "btn btn-primary" %>
+<% end %>
+
+
 </div>
+
+<style>
+
+.my-alert{
+  width: 50%;
+  margin: 0 auto;
+}
+</style>
 

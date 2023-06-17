@@ -13,8 +13,10 @@
     <div class="card bg-light">
       <div class="card-body">
         <h5 class="card-title text-center">Dono da conta</h5>
-        <p class="card-text fw-bold"><%= @account.user.name %></p>
-          <%= link_to "Editar Cadastro", edit_user_registration_path, class:"btn btn-outline-primary" %> 
+        <p class="card-text m-0">Nome: <%= @account.user.name %></p>
+        <p class="card-text m-0">Cpf: <%= @account.user.cpf %></p>
+        <p class="card-text m-0">Data de nascimento: <%= @account.user.birthdate %></p>
+          <%= link_to "Editar Cadastro", edit_user_path(current_user), class: "btn btn-outline-primary mt-2" %>
       </div>
     </div>
   </div>
@@ -36,7 +38,9 @@
         <h5 class="card-title text-center">Saldo</h5>
         <p class="card-text fw-bold">R$<%= @account.balance %></p>
          <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-primary" %>
+<%= link_to "Transferir", transfer_form_account_path(@account), class: "btn btn-primary" %>
          <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-primary" %>
+         <%= link_to "Ver Extrato", extrato_transactions_path, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
