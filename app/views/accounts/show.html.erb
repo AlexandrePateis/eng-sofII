@@ -1,13 +1,65 @@
-<p style="color: green"><%= notice %></p>
 
-<p>Account Number: <%= @account.account_number %></p>
-<p>Balance: <%= @account.balance %></p>
-<p>Owner: <%= @account.user.name %></p>
+<% if notice.present? %>
+  <p id="alert-alert" class="alert alert-success text-center my-alert mt-1 fw-bold"><%= notice %></p>
+<% end %>
 
+<% if alert.present? %>
+  <p id="alert-alert" class="alert alert-danger text-center my-alert mt-1 fw-bold"><%= alert %></p>
+<% end %>
 
-<div>
-  <%= link_to "Edit this account", edit_account_path(@account),  class: "btn btn-primary"  %> |
-  <%= link_to "Back to accounts", accounts_path,  class: "btn btn-primary"  %>
-
-  <%= button_to "Destroy this account", @account, method: :delete,  class: "btn btn-primary"  %>
+<h1 class="text-center mt-3">Dados da Conta</h1>
+<div class="row-my d-flex gap-2 mt-5">
+<div class="col-sm-4">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Dono da conta</h5>
+        <p class="card-text fw-bold"><%= @account.user.name %></p>
+          <%= link_to "Editar Cadastro", edit_user_registration_path, class:"btn btn-outline-primary" %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Número da conta</h5>
+        <p class="card-text fw-bold"><%= @account.account_number %></p>
+        <div class="d-flex gap-2">
+          <%= link_to "Voltar para o inicio", accounts_path,  class: "btn btn-outline-primary"  %>
+          <%= button_to "Apagar conta", @account, method: :delete,  class: "btn btn-outline-danger float-end", style: "--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"  %>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h5 class="card-title text-center">Saldo</h5>
+        <p class="card-text fw-bold">R$<%= @account.balance %></p>
+         <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-primary" %>
+         <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<style>
+.row-my{
+  width: 75%;
+  margin: 0 auto;
+}
+.my-alert{
+  width: 50%;
+  margin: 0 auto;
+}
+</style>
+
+<script>
+  setTimeout(function() {
+    var alertAlert = document.getElementById('alert-alert');
+    
+    if (alertAlert) {
+      alertAlert.remove();
+    }
+  }, 3000);
+</script>

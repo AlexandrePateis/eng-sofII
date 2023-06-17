@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   resources :accounts do
-    post 'withdraw', on: :member
-    post 'deposit', on: :member
+    member do
+      get 'withdraw' => 'accounts#withdraw_form', as: :withdraw_form
+      post 'withdraw' => 'accounts#withdraw', as: :withdraw
+      get 'deposit' => 'accounts#deposit_form', as: :deposit_form
+      post 'deposit' => 'accounts#deposit', as: :deposit
+    end
   end
     devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy'

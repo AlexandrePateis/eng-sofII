@@ -31,6 +31,13 @@ class AccountsController < ApplicationController
     end
   end
   
+  def deposit_form
+    @account = Account.find(params[:id])
+  end
+
+  def withdraw_form
+    @account = Account.find(params[:id])
+  end
 
   # PATCH/PUT /accounts/1 or /accounts/1.json
   def update
@@ -60,18 +67,21 @@ class AccountsController < ApplicationController
     withdraw_amount = params[:withdraw_amount].to_f
     if withdraw_amount <= @account.balance
       @account.update(balance: @account.balance - withdraw_amount)
-      redirect_to account_path(@account), notice: 'Saque feito com sucesso.'
+      redirect_to account_path(@account), notice: 'Saque feito com sucesso !'
     else
-      redirect_to account_path(@account), alert: 'Insufficient balance.'
+      redirect_to account_path(@account), alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
     end
   end
 
   def deposit
-
     deposit_amount = params[:deposit_amount].to_d
-    @account.update(balance: @account.balance + deposit_amount)
-    redirect_to account_path(@account), notice: 'Deposito feito com sucesso.'
+    if @account.update(balance: @account.balance + deposit_amount)
+      redirect_to account_path(@account), notice: 'Depósito feito com sucesso.'
+    else
+      redirect_to account_path(@account), alert: 'Falha ao fazer o depósito.'
+    end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
