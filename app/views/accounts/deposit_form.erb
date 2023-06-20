@@ -1,9 +1,9 @@
 <h1 class="text-center mt-3">Deposito</h1>
 
 <%= form_tag deposit_account_path(@account), method: :post do %>
-  <div class="d-flex flex-column row-my-2 border p-5 gap-3 bg-light mt-5 rounded">
+  <div class="d-flex flex-column my-class border p-5 gap-3 bg-light rounded p-5 mt-5">
     <%= label_tag :deposit_amount, 'Digite o valor que será depositado', class: "fw-bold" %>
-    <%= number_field_tag :deposit_amount, nil, step: "any", class: "form-control" %>
+    <%= number_field_tag :deposit_amount, nil, step: "any", class: "form-control", required: true %>
      <div class="d-flex gap-3 justify-content-center">
       <%= submit_tag 'Depostiar', class: "btn btn-success" %>
       <%= link_to "Voltar", :back, class: "btn btn-secondary" %>
