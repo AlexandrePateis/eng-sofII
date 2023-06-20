@@ -1,12 +1,14 @@
 <h1 class="text-center mt-3">Extrato</h1>
-
-<div class="row-my">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
   <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th>Data</th>
         <th>Hora</th>
         <th>Ação</th>
+        <th>Descrição</th>
         <th>Valor</th>
       </tr>
     </thead>
@@ -16,17 +18,18 @@
           <td><%= transaction.created_at.strftime("%d/%m/%Y") %></td>
           <td><%= transaction.created_at.strftime("%H:%M:%S") %></td>
           <td><%= transaction.action %></td>
-          <td><%= transaction.amount.negative? ? transaction.amount : "+#{transaction.amount}" %></td>
+          <td><%= transaction.description %></td>
+          <td><%= transaction.action == 'Saque' || transaction.action == 'Transferência - Saída' ? "-#{transaction.amount}" : "+#{transaction.amount}" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <button onclick="window.print()" class="btn btn-primary d-print-none">Imprimir</button>
+    <button onclick="window.print()" class="btn btn-primary d-print-none">Imprimir</button>
+    <%= link_to "Voltar", :back, class: "btn btn-secondary d-print-none" %>
+    </div>
+  </div>
+  <div class="mt-5 d-print-none">  
+    <%= paginate @transactions %>
+  </div>
 </div>
 
-<style>
-.row-my{
-  width: 60%;
-  margin: 0 auto;
-}
-</style>

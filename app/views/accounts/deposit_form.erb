@@ -1,15 +1,9 @@
-<h1 class="text-center">Saque</h1>
+<h1 class="text-center">Deposito</h1>
 
 <%= form_tag deposit_account_path(@account), method: :post do %>
   <div class="d-flex flex-column row-my border p-5 gap-3 bg-light mt-5 rounded">
     <%= label_tag :deposit_amount, 'Digite o valor que será depositado', class: "fw-bold" %>
-    <%= number_field_tag :deposit_amount, nil, class: "form-control" %>
+    <%= number_field_tag :deposit_amount, nil, step: "any", class: "form-control" %>
     <%= submit_tag 'Depositar', class: "btn btn-success" %>
   </div>
 <% end %>
-<style>
-.row-my{
-  width: 35%;
-  margin: 0 auto;
-}
-</style>

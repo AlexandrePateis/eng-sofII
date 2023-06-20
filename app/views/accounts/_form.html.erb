@@ -18,17 +18,11 @@
 
   <div class="d-flex flex-column">
     <%= form.label :balance, "Saldo inicial", style: "display: block", class: "text-center fw-bold" %>
-    <%= form.number_field :balance, class: "form-control mt-2" %>
+    <%= form.number_field :balance, class: "form-control mt-2", step: 'any' %>
     <%= form.submit "Criar conta", class: "btn btn-primary mt-3" %>
     <%= link_to "Voltar", accounts_path, class: "btn btn-secondary mt-2" %>
 
   </div>
 
 <% end %>
-  </div>
-  <style>
-.row-my{
-  width: 35%;
-  margin: 0 auto;
-}
-</style>
+</div>

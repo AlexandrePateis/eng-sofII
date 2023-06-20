@@ -46,11 +46,17 @@ class AccountsController < ApplicationController
         @source_account.update(balance: @source_account.balance - amount)
         @target_account.update(balance: @target_account.balance + amount)
       end
+  
+      Transaction.create(user_id: current_user.id, account_id: @source_account.id, action: 'Transferência - Saída', amount: amount, description: "Transferência para conta ##{params[:account_number]}")
+      Transaction.create(user_id: @target_account.user_id, account_id: @target_account.id, action: 'Transferência - Entrada', amount: amount, description: "Transferência da conta ##{current_user.account.account_number}")
+  
       redirect_to accounts_path, notice: 'Transferência realizada com sucesso.'
     else
       redirect_to accounts_path, alert: 'Falha na transferência. Verifique os dados da conta de destino e o saldo da sua conta.'
     end
   end
+  
+  
   
   
   def deposit_form
@@ -75,8 +81,9 @@ class AccountsController < ApplicationController
   end  
   
   def destroy
+    @account.transactions.destroy_all
     @account.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: "Account was successfully destroyed." }
       format.json { head :no_content }

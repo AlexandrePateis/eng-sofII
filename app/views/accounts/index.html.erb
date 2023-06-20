@@ -6,9 +6,9 @@
   <p id="alert-alert" class="alert alert-danger text-center my-alert mt-1 fw-bold"><%= alert %></p>
 <% end %>
 
-<h1 class="text-center">Conta</h1>
+<h1 class="text-center mb-5 mt-3">Bem-vindo novamente <%= current_user.name %> !! </h1>
 
-<div id="accounts" class="d-flex">
+<div id="accounts" class="d-flex justify-content-center">
  <% @accounts.each do |account| %>
   <%= render account %>
   <% if account.user == current_user %>
@@ -16,18 +16,14 @@
   <% end %>
 <% end %>
 
-<% if !current_user.account %>
-  <%= link_to "Nova conta", new_account_path ,  class: "btn btn-primary" %>
-<% end %>
-
-
+  <% if !current_user.account %>
+    <%= link_to "Nova conta", new_account_path ,  class: "btn btn-primary" %>
+  <% end %>
 </div>
-
 <style>
-
-.my-alert{
-  width: 50%;
-  margin: 0 auto;
-}
+  #carouselExampleDark .carousel-item img {
+    width: 100%;
+    height: 300px; /* Defina a altura desejada para as imagens */
+    object-fit: cover;
+  }
 </style>
-

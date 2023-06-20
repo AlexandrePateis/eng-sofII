@@ -1,1 +1,29 @@
 @import "bootstrap";
+
+.row-my {
+  width: 60%;
+  margin: 0 auto;
+}
+.row-my-login{
+  width: 40%;
+  margin: 0 auto;
+}
+.my-alert {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.link-secondary {
+  margin-right: 20px;
+}
+.my-class {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.card {
+  height: 200px !important; /* Defina a altura desejada para os cards */
+}
+.bttn-width{
+    width: 30% !important;
+}

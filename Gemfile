@@ -8,6 +8,11 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
+gem 'ransack'
+gem 'kaminari'
+gem 'faker'
+gem 'simple_form'
+gem 'kaminari-bootstrap'
 gem "stimulus-rails"
 gem "jbuilder"
 gem "bootstrap"
@@ -24,6 +29,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'rspec-rails'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -37,6 +43,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem "factory_bot_rails"
 end
 
 gem "devise", "~> 4.9"

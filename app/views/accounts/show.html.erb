@@ -8,26 +8,28 @@
 <% end %>
 
 <h1 class="text-center mt-3">Dados da Conta</h1>
-<div class="row-my d-flex gap-2 mt-5">
-<div class="col-sm-4">
+<div class="row justify-content-center d-flex gap-2 mt-5">
+<div class="col-sm-3">
     <div class="card bg-light">
       <div class="card-body">
         <h5 class="card-title text-center">Dono da conta</h5>
         <p class="card-text m-0">Nome: <%= @account.user.name %></p>
-        <p class="card-text m-0">Cpf: <%= @account.user.cpf %></p>
         <p class="card-text m-0">Data de nascimento: <%= @account.user.birthdate %></p>
           <%= link_to "Editar Cadastro", edit_user_path(current_user), class: "btn btn-outline-primary mt-2" %>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="card bg-light">
       <div class="card-body">
         <h5 class="card-title text-center">Número da conta</h5>
         <p class="card-text fw-bold"><%= @account.account_number %></p>
         <div class="d-flex gap-2">
-          <%= link_to "Voltar para o inicio", accounts_path,  class: "btn btn-outline-primary"  %>
-          <%= button_to "Apagar conta", @account, method: :delete,  class: "btn btn-outline-danger float-end", style: "--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"  %>
+          <%= link_to "Voltar", accounts_path,  class: "btn btn-secondary"  %>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Apagar conta
+          </button>
       </div>
       </div>
     </div>
@@ -37,9 +39,9 @@
       <div class="card-body">
         <h5 class="card-title text-center">Saldo</h5>
         <p class="card-text fw-bold">R$<%= @account.balance %></p>
-         <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-primary" %>
-<%= link_to "Transferir", transfer_form_account_path(@account), class: "btn btn-primary" %>
-         <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-primary" %>
+         <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-success" %>
+         <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-warning" %>
+          <%= link_to "Transferir", transfer_form_account_path(@account), class: "btn btn-primary" %>
          <%= link_to "Ver Extrato", extrato_transactions_path, class: "btn btn-primary" %>
       </div>
     </div>
@@ -47,16 +49,24 @@
 </div>
 
 
-<style>
-.row-my{
-  width: 75%;
-  margin: 0 auto;
-}
-.my-alert{
-  width: 50%;
-  margin: 0 auto;
-}
-</style>
+          <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Tem certeza que deseja apagar ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+        Ao confirmar, não será possível reverter essa ação.
+        </div>
+        <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      <%= button_to "Apagar conta", @account, method: :delete,  class: "btn btn-outline-danger float-end"  %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   setTimeout(function() {

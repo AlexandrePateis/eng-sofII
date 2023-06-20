@@ -1,16 +1,9 @@
-<h1 class="text-center">Saque</h1>
 
 <%= form_tag withdraw_account_path(@account), method: :post do %>
   <div class="d-flex flex-column row-my border p-5 gap-3 bg-light mt-5 rounded">
     <span class="fs-8">Valor disponivel: R$<%= @account.balance %></span>
     <%= label_tag :withdraw_amount, 'Digite o valor a ser sacado', class: "fw-bold" %>
-    <%= number_field_tag :withdraw_amount, nil, class: "form-control" %>
+    <%= number_field_tag :withdraw_amount, nil, step: "any", class: "form-control" %>
     <%= submit_tag 'Sacar', class: "btn btn-success" %>
   </div>
 <% end %>
-<style>
-.row-my{
-  width: 35%;
-  margin: 0 auto;
-}
-</style>
