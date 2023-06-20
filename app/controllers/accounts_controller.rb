@@ -50,7 +50,7 @@ class AccountsController < ApplicationController
       Transaction.create(user_id: current_user.id, account_id: @source_account.id, action: 'Transferência - Saída', amount: amount, description: "Transferência para conta ##{params[:account_number]}")
       Transaction.create(user_id: @target_account.user_id, account_id: @target_account.id, action: 'Transferência - Entrada', amount: amount, description: "Transferência da conta ##{current_user.account.account_number}")
   
-      redirect_to accounts_path, notice: 'Transferência realizada com sucesso.'
+      redirect_to extrato_transactions_path, notice: 'Transferência realizada com sucesso.'
     else
       redirect_to accounts_path, alert: 'Falha na transferência. Verifique os dados da conta de destino e o saldo da sua conta.'
     end
@@ -85,7 +85,7 @@ class AccountsController < ApplicationController
     @account.destroy
     
     respond_to do |format|
-      format.html { redirect_to accounts_url, notice: "Account was successfully destroyed." }
+      format.html { redirect_to accounts_url, notice: "Conta apagada com sucesse." }
       format.json { head :no_content }
     end
   end
@@ -99,9 +99,9 @@ class AccountsController < ApplicationController
     if withdraw_amount <= @account.balance
       @account.update(balance: @account.balance - withdraw_amount)
       Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Saque', amount: withdraw_amount)
-      redirect_to account_path(@account), notice: 'Saque feito com sucesso !'
+      redirect_to extrato_transactions_path, notice: 'Saque realizado com sucesso.'
     else
-      redirect_to account_path(@account), alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
+      redirect_to extrato_transactions_path, alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
     end
   end
 
@@ -110,7 +110,7 @@ class AccountsController < ApplicationController
     deposit_amount = params[:deposit_amount].to_d
     if @account.update(balance: @account.balance + deposit_amount)
       Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Deposito', amount: deposit_amount)
-      redirect_to account_path(@account), notice: 'Depósito feito com sucesso.'
+      redirect_to extrato_transactions_path, notice: 'Deposito realizado com sucesso.'
     else
       redirect_to account_path(@account), alert: 'Falha ao fazer o depósito.'
     end

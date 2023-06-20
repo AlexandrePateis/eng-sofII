@@ -1,15 +1,15 @@
-<h1 class="text-center">Transferência</h1>
+<h1 class="text-center mt-3">Transferência</h1>
 
 <%= form_tag transfer_form_account_path(@account), method: :post do %>
-  <div class="d-flex flex-column row-my border p-5 gap-3 bg-light mt-5 rounded">
+  <div class="d-flex flex-column row-my-2 border p-5 gap-3 bg-light mt-5 rounded">
 
 <div class="form-group">
   <%= label_tag :account_number, 'Número da Conta de Destino', class: 'fw-bold' %>
-  <%= number_field_tag :account_number, nil, class: 'form-control' %>
+  <%= number_field_tag :account_number, nil, class: 'form-control', required: true %>
 </div>
 <div class="form-group">
     <%= label_tag :amount, 'Valor da Transferência', class: 'fw-bold' %>
-    <%= number_field_tag :amount, nil, class: 'form-control' %>
+    <%= number_field_tag :amount, nil, class: 'form-control', required: true %>
 </div>
 <div class="d-flex gap-3 justify-content-center">
     <%= submit_tag 'Transferir', class: 'btn btn-primary' %>
