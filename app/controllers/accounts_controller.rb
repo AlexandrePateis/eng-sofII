@@ -98,13 +98,13 @@ class AccountsController < ApplicationController
     if withdraw_amount.negative?
       redirect_to account_path(@account), alert: 'O valor do saque não pode ser negativo.'
     else
-    if withdraw_amount <= @account.balance
-      @account.update(balance: @account.balance - withdraw_amount)
-      Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Saque', amount: withdraw_amount)
-      redirect_to extrato_transactions_path, notice: 'Saque realizado com sucesso.'
-    else
-      redirect_to extrato_transactions_path, alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
-    end
+      if withdraw_amount <= @account.balance
+        @account.update(balance: @account.balance - withdraw_amount)
+        Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Saque', amount: withdraw_amount)
+        redirect_to extrato_transactions_path, notice: 'Saque realizado com sucesso.'
+      else
+        redirect_to extrato_transactions_path, alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
+      end
    end
   end
 
