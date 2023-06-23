@@ -41,12 +41,12 @@ a:hover {
 .bttn-width{
     width: 30% !important;
 }
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+
 
 footer {
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0;
 }
