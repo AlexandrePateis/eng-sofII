@@ -10,7 +10,7 @@
       <tr>
         <th>Data</th>
         <th>Hora</th>
-        <th>Ação</th>
+        <th>Tipo</th>
         <th>Descrição</th>
         <th>Valor</th>
       </tr>
@@ -20,9 +20,9 @@
         <tr>
           <td><%= transaction.created_at.strftime("%d/%m/%Y") %></td>
           <td><%= transaction.created_at.strftime("%H:%M:%S") %></td>
-          <td><%= transaction.action %></td>
+          <td><%= transaction.transaction_type %></td>
           <td><%= transaction.description %></td>
-          <td><%= transaction.action == 'Saque' || transaction.action == 'Transferência - Saída' ? "-#{transaction.amount}" : "+#{transaction.amount}" %></td>
+          <td><%= transaction.action == 'Saque' || transaction.action == 'Transferência - Saída' ? "-#{number_with_precision(transaction.amount, precision: 2)}" : "+#{number_with_precision(transaction.amount, precision: 2)}" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -31,8 +31,4 @@
     <%= link_to "Voltar", :back, class: "btn btn-secondary d-print-none" %>
     </div>
   </div>
-  <div class="mt-5 d-print-none">  
-    <%= paginate @transactions %>
-  </div>
 </div>
-

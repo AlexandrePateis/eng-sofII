@@ -8,41 +8,33 @@
 <% end %>
 
 <h1 class="text-center mt-3">Dados da Conta</h1>
-<div class="row justify-content-center d-flex gap-2 mt-5">
-<div class="col-sm-3">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h5 class="card-title text-center">Dono da conta</h5>
-        <p class="card-text m-0">Nome: <%= @account.user.name %></p>
-        <p class="card-text m-0">Data de nascimento: <%= @account.user.birthdate %></p>
-          <%= link_to "Editar Cadastro", edit_user_path(current_user), class: "btn btn-outline-primary mt-2" %>
+<div class="container">
+  <div class="row justify-content-center d-flex gap-2 mt-5">
+  <div class="col-md-6">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title text-center">Dados da conta</h5>
+          <p class="card-text m-0">Nome: <%= @account.user.name %></p>
+          <p class="card-text m-0">Data de nascimento: <%= @account.user.birthdate %></p>
+          <p class="card-text m-0">Número da conta: <%= @account.account_number %></p>
+            <%= link_to "Editar Cadastro", edit_user_path(current_user), class: "btn btn-outline-primary mt-2" %>
+            <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Apagar conta
+            </button>
+            <%= link_to "Voltar", accounts_path,  class: "btn btn-secondary mt-2"  %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h5 class="card-title text-center">Número da conta</h5>
-        <p class="card-text fw-bold"><%= @account.account_number %></p>
-        <div class="d-flex gap-2">
-          <%= link_to "Voltar", accounts_path,  class: "btn btn-secondary"  %>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Apagar conta
-          </button>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card bg-light">
-      <div class="card-body">
-        <h5 class="card-title text-center">Saldo</h5>
-        <p class="card-text fw-bold">R$<%= @account.balance %></p>
-         <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-success" %>
-         <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-warning" %>
-          <%= link_to "Transferir", transfer_form_account_path(@account), class: "btn btn-primary" %>
-         <%= link_to "Ver Extrato", extrato_transactions_path, class: "btn btn-primary" %>
+    <div class="col-md-5">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title text-center">Saldo</h5>
+          <p class="card-text fw-bold ">R$ <%= number_with_precision(@account.balance, precision: 2) %></p>
+          <%= link_to "Depositar", deposit_form_account_path(@account), class: "btn btn-success" %>
+          <%= link_to "Sacar", withdraw_form_account_path(@account), class: "btn btn-warning" %>
+            <%= link_to "Transferir", transfer_form_account_path(@account), class: "btn btn-primary" %>
+          <%= link_to "Ver Extrato", extrato_transactions_path, class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
   </div>

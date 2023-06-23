@@ -1,34 +1,39 @@
-<h2 class="text-center mt-3">Sign up</h2>
+<h2 class="text-center mt-3">Criar conta</h2>
 <div class="row-my-login border p-5 bh-light">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="form-group">
+  <div class="form-group mt-2">
     <%= f.label :name, class: 'fw-bold' %><br />
     <%= f.text_field :name, autofocus: true, class: 'form-control', required: true %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mt-2">
+    <%= f.label :birthdate,"Data de nascimento", class: 'fw-bold' %><br />
+    <%= f.date_field :birthdate, autofocus: true, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group mt-2">
     <%= f.label :email, class: 'fw-bold' %><br />
     <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :password, class: 'fw-bold' %>
+  <div class="form-group mt-2">
+    <%= f.label :password,"Senha", class: 'fw-bold' %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(Mínimo 6 caracteres)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation, class: 'fw-bold' %><br />
+  <div class="form-group mt-2">
+    <%= f.label :password_confirmation,"Confirme sua senha", class: 'fw-bold' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary mt-3" %>
+    <%= f.submit "Cirar conta", class: "btn btn-primary mt-3" %>
   </div>
 <%= render "devise/shared/links" %>
 <% end %>

@@ -9,7 +9,7 @@
 </div>
 <div class="form-group">
     <%= label_tag :amount, 'Valor da Transferência', class: 'fw-bold' %>
-    <%= number_field_tag :amount, nil, class: 'form-control', required: true %>
+    <%= number_field_tag :amount, nil, step: "0.01", class: 'form-control', required: true %>
 </div>
 <div class="d-flex gap-3 justify-content-center">
     <%= submit_tag 'Transferir', class: 'btn btn-primary' %>

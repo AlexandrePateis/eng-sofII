@@ -3,12 +3,12 @@
 
 <%= form_tag withdraw_account_path(@account), method: :post do %>
   <div class="d-flex flex-column my-class border p-5 gap-3 border bg-light rounded p-5 mt-5">
-    <span class="fs-8">Valor disponivel: R$<%= @account.balance %></span>
-    <%= label_tag :withdraw_amount, 'Digite o valor a ser sacado', class: "fw-bold" %>
-    <%= number_field_tag :withdraw_amount, nil, step: "any", class: "form-control", required: true %>
+    <span class="fs-8 fw-bold">Valor disponivel: R$<%= @account.balance %></span>
+    <%= label_tag :withdraw_amount, 'Digite o valor a ser sacado' %>
+    <%= number_field_tag :withdraw_amount, nil, step: "0.01", class: "form-control", required: true, pattern: "\d+(\.\d{1,2})?" %>
     <div class="d-flex gap-3 justify-content-center">
       <%= submit_tag 'Sacar', class: "btn btn-success" %>
-      <%= link_to "Voltar", :back, class: "btn btn-secondary" %>
+      <%= link_to "Voltar", account_path(@account), class: "btn btn-secondary" %>
     </div>
   </div>
 <% end %>

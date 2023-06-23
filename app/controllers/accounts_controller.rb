@@ -47,8 +47,8 @@ class AccountsController < ApplicationController
         @target_account.update(balance: @target_account.balance + amount)
       end
   
-      Transaction.create(user_id: current_user.id, account_id: @source_account.id, action: 'Transferência - Saída', amount: amount, description: "Transferência para conta ##{params[:account_number]}")
-      Transaction.create(user_id: @target_account.user_id, account_id: @target_account.id, action: 'Transferência - Entrada', amount: amount, description: "Transferência da conta ##{current_user.account.account_number}")
+      Transaction.create(user_id: current_user.id, account_id: @source_account.id, transaction_type: Transaction::TRANSACTION_TYPES[2], action: 'Transferência - Saída', amount: amount, description: "Transferência para conta ##{params[:account_number]}")
+      Transaction.create(user_id: @target_account.user_id, account_id: @target_account.id,transaction_type: Transaction::TRANSACTION_TYPES[2], action: 'Transferência - Entrada', amount: amount, description: "Transferência da conta ##{current_user.account.account_number}")
   
       redirect_to extrato_transactions_path, notice: 'Transferência realizada com sucesso.'
     else
@@ -100,7 +100,7 @@ class AccountsController < ApplicationController
     else
       if withdraw_amount <= @account.balance
         @account.update(balance: @account.balance - withdraw_amount)
-        Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Saque', amount: withdraw_amount)
+        Transaction.create(user_id: current_user.id, transaction_type: Transaction::TRANSACTION_TYPES[1], account_id: @account.id, action: 'Saque', amount: withdraw_amount)
         redirect_to extrato_transactions_path, notice: 'Saque realizado com sucesso.'
       else
         redirect_to extrato_transactions_path, alert: 'Saldo insuficiete! Você não pode sacar mais do que tem em saldo.'
@@ -114,7 +114,7 @@ class AccountsController < ApplicationController
       redirect_to account_path(@account), alert: 'O valor de depósito não pode ser negativo.'
     else
       if @account.update(balance: @account.balance + deposit_amount)
-        Transaction.create(user_id: current_user.id, account_id: @account.id, action: 'Depósito', amount: deposit_amount)
+        Transaction.create(user_id: current_user.id, transaction_type: Transaction::TRANSACTION_TYPES[0], account_id: @account.id, action: 'Depósito', amount: deposit_amount)
         redirect_to extrato_transactions_path, notice: 'Depósito realizado com sucesso.'
       else
         redirect_to account_path(@account), alert: 'Falha ao fazer o depósito.'

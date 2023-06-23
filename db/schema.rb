@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_17_170606) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_232529) do
   create_table "accounts", force: :cascade do |t|
     t.string "account_number"
     t.decimal "balance"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_170606) do
     t.string "description"
     t.integer "source_account_id"
     t.integer "target_account_id"
+    t.string "transaction_type"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["source_account_id"], name: "index_transactions_on_source_account_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"

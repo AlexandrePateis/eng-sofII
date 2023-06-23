@@ -3,4 +3,7 @@ class Transaction < ApplicationRecord
     validates :amount, numericality: { greater_than_or_equal_to: 0 }
     belongs_to :account
     validates :account, presence: true
+
+    TRANSACTION_TYPES = ['Depósito', 'Saque', 'Transferência']
+
 end
