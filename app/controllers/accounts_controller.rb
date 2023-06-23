@@ -9,22 +9,18 @@ class AccountsController < ApplicationController
   def transfer_form
     @account = Account.find(params[:id])
 
-    # Lógica para exibir o formulário de transferência
   end
-  # GET /accounts/1 or /accounts/1.json
+  
   def show
   end
 
-  # GET /accounts/new
   def new
     @account = current_user.build_account
   end
 
-  # GET /accounts/1/edit
   def edit
   end
 
-  # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
     @account.user = current_user
@@ -67,7 +63,6 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
   end
 
-  # PATCH/PUT /accounts/1 or /accounts/1.json
   def update
     respond_to do |format|
       if @account.update(account_params)
@@ -89,8 +84,6 @@ class AccountsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  # DELETE /accounts/1 or /accounts/1.json
 
 
   def withdraw

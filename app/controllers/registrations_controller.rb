@@ -15,10 +15,9 @@ def update
     else
       render :edit
     end
-  end
+end
   
 
-  # Redireciona o usuário para a página de perfil do usuário após a atualização
 private
 
     def sign_up_params
